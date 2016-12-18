@@ -25,7 +25,7 @@ fn key_v(starting: &str, key: i32) -> Vec<char> {
     let s_v: Vec<char> = s.chars().collect();
     let mut new_v: Vec<char> = Vec::new();
 
-    let mut i: i32 = k;
+    let mut i: i32 = k-1;
 
     while i < (s_v.len() as i32) {
         new_v.push(s_v[(i as usize)]);
@@ -91,6 +91,36 @@ fn encsr_w(word: &str, key: i32) -> String {
 
     let s: String = new_w_v.into_iter().collect();
 
+    return s;
+}
+
+fn decsr_w(word: &str, key: i32) -> String {
+
+    let starting = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let key_v = key_v(starting, key);
+
+    let mut pos_v: Vec<i16> = Vec::new();
+    let mut cur_i: i16 = 0;
+
+    for c in word.to_uppercase().chars() {
+        while cur_i < (key_v.len() as i16) - 1 {
+            if c == key_v[(cur_i as usize)] {
+                pos_v.push(cur_i);
+                cur_i = 0;
+                break;
+            }
+            cur_i += 1
+        }
+    }
+
+    let c_vec: Vec<char> = starting.chars().collect();
+    let mut fin_v: Vec<char> = Vec::new();
+
+    for p in pos_v {
+        fin_v.push(c_vec[(p as usize)]);
+    }
+
+    let s: String = fin_v.into_iter().collect();
     return s;
 }
 
