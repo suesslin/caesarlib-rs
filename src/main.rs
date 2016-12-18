@@ -14,8 +14,8 @@ fn main() {
         Ok(x) => x,
         Err(_) => 0
     };
-    
-    println!("Your translated string is\n{:?}", csr(w.trim(), k));
+
+    println!("Your translated string is\n{:?}", encsr(w.trim(), k));
 }
 
 fn key_v(starting: &str, key: i32) -> Vec<char> {
@@ -25,7 +25,7 @@ fn key_v(starting: &str, key: i32) -> Vec<char> {
     let s_v: Vec<char> = s.chars().collect();
     let mut new_v: Vec<char> = Vec::new();
 
-    let mut i: i32 = k-1;
+    let mut i: i32 = k;
 
     while i < (s_v.len() as i32) {
         new_v.push(s_v[(i as usize)]);
@@ -73,7 +73,7 @@ fn l_to_n(l: char) -> i16 {
     }
 }
 
-fn csr_w(word: &str, key: i32) -> String {
+fn encsr_w(word: &str, key: i32) -> String {
     let starting = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let key_v = key_v(starting, key);
 
@@ -94,12 +94,12 @@ fn csr_w(word: &str, key: i32) -> String {
     return s;
 }
 
-fn csr(word: &str, key: i32) -> Vec<String> {
+fn encsr(word: &str, key: i32) -> Vec<String> {
     let sp_w: Vec<&str> = word.split(" ").collect();
     let mut w_v: Vec<String> = Vec::new();
 
     for cur_w in sp_w {
-        w_v.push(csr_w(cur_w, key));
+        w_v.push(encsr_w(cur_w, key));
     }
 
     return w_v;
