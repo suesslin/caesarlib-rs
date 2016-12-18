@@ -1,5 +1,21 @@
+use std::io;
+
 fn main() {
-    println!("{}", caesarify("HELLO", 20));
+    let mut w = String::new();
+    let mut k = String::new();
+
+    println!("Type in a message to write");
+    io::stdin().read_line(&mut w).expect("Error!");
+
+    println!("Type in a key");
+    io::stdin().read_line(&mut k).expect("Error!");
+
+    let k: i32 = match k.trim().parse() {
+        Ok(x) => x,
+        Err(_) => 0
+    };
+    
+    println!("Your translated string is\n{:?}", csr(w.trim(), k));
 }
 
 fn key_v(starting: &str, key: i32) -> Vec<char> {
@@ -57,7 +73,7 @@ fn l_to_n(l: char) -> i16 {
     }
 }
 
-fn caesarify(word: &str, key: i32) -> String {
+fn csr_w(word: &str, key: i32) -> String {
     let starting = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let key_v = key_v(starting, key);
 
@@ -76,4 +92,15 @@ fn caesarify(word: &str, key: i32) -> String {
     let s: String = new_w_v.into_iter().collect();
 
     return s;
+}
+
+fn csr(word: &str, key: i32) -> Vec<String> {
+    let sp_w: Vec<&str> = word.split(" ").collect();
+    let mut w_v: Vec<String> = Vec::new();
+
+    for cur_w in sp_w {
+        w_v.push(csr_w(cur_w, key));
+    }
+
+    return w_v;
 }
