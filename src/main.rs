@@ -1,23 +1,44 @@
 use std::io;
 
 fn main() {
-    // let mut w = String::new();
-    // let mut k = String::new();
-    //
-    // println!("Type in a message to write");
-    // io::stdin().read_line(&mut w).expect("Error!");
-    //
-    // println!("Type in a key");
-    // io::stdin().read_line(&mut k).expect("Error!");
-    //
-    // let k: i32 = match k.trim().parse() {
-    //     Ok(x) => x,
-    //     Err(_) => 0
-    // };
-    //
-    // println!("Your translated string is\n{:?}", encsr(w.trim(), k));
-    let haha = decsr("KHOOR ZRUOG", 4);
-    println!("{}", haha);
+
+    let mut m = String::new();
+    let mut w = String::new();
+    let mut k = String::new();
+
+    let mut m2: i8;
+
+    loop {
+        println!("Choose one of these methods\n0 > Encipher\n1 > Decipher");
+        io::stdin().read_line(&mut m).expect("Error");
+
+        m2 = match m.trim().parse() {
+            Ok(x) => x,
+            Err(_) => continue
+        };
+
+        break;
+    }
+
+    println!("Type in a message to write");
+    io::stdin().read_line(&mut w).expect("Error!");
+
+    println!("Type in a key");
+    io::stdin().read_line(&mut k).expect("Error!");
+
+    let k: i32 = match k.trim().parse() {
+        Ok(x) => x,
+        Err(_) => 0
+    };
+
+    println!("Your translated string is\n{:?}", trs(w, k, m2));
+}
+
+fn trs(w: String, k: i32, m: i8) -> String {
+    if m == 0 {
+        return encsr(w.trim(), k);
+    }
+    return decsr(w.trim(), k);
 }
 
 fn key_v(starting: &str, key: i32) -> Vec<char> {
