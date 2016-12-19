@@ -16,6 +16,11 @@ fn main() {
     };
 
     println!("Your translated string is\n{:?}", encsr(w.trim(), k));
+
+    // let try_al: Vec<String> = decsr(encsr("Hello World", 10), 10);
+    // for s in try_al {
+    //     println!("{:?}", s);
+    // }
 }
 
 fn key_v(starting: &str, key: i32) -> Vec<char> {
@@ -132,5 +137,15 @@ fn encsr(word: &str, key: i32) -> Vec<String> {
         w_v.push(encsr_w(cur_w, key));
     }
 
-    return w_v;
+    return w_v
+}
+
+fn decsr(enc: Vec<String>, key: i32) -> Vec<String> {
+    let mut fin_v: Vec<String> = Vec::new();
+
+    for pt in enc {
+        fin_v.push(decsr_w(pt.trim(), key));
+    }
+
+    return fin_v;
 }
