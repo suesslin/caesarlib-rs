@@ -1,26 +1,23 @@
 use std::io;
 
 fn main() {
-    let mut w = String::new();
-    let mut k = String::new();
-
-    println!("Type in a message to write");
-    io::stdin().read_line(&mut w).expect("Error!");
-
-    println!("Type in a key");
-    io::stdin().read_line(&mut k).expect("Error!");
-
-    let k: i32 = match k.trim().parse() {
-        Ok(x) => x,
-        Err(_) => 0
-    };
-
-    println!("Your translated string is\n{:?}", encsr(w.trim(), k));
-
-    // let try_al: Vec<String> = decsr(encsr("Hello World", 10), 10);
-    // for s in try_al {
-    //     println!("{:?}", s);
-    // }
+    // let mut w = String::new();
+    // let mut k = String::new();
+    //
+    // println!("Type in a message to write");
+    // io::stdin().read_line(&mut w).expect("Error!");
+    //
+    // println!("Type in a key");
+    // io::stdin().read_line(&mut k).expect("Error!");
+    //
+    // let k: i32 = match k.trim().parse() {
+    //     Ok(x) => x,
+    //     Err(_) => 0
+    // };
+    //
+    // println!("Your translated string is\n{:?}", encsr(w.trim(), k));
+    let haha = decsr("KHOOR ZRUOG", 4);
+    println!("{}", haha);
 }
 
 fn key_v(starting: &str, key: i32) -> Vec<char> {
@@ -129,7 +126,7 @@ fn decsr_w(word: &str, key: i32) -> String {
     return s;
 }
 
-fn encsr(word: &str, key: i32) -> Vec<String> {
+fn encsr(word: &str, key: i32) -> String {
     let sp_w: Vec<&str> = word.split(" ").collect();
     let mut w_v: Vec<String> = Vec::new();
 
@@ -137,15 +134,15 @@ fn encsr(word: &str, key: i32) -> Vec<String> {
         w_v.push(encsr_w(cur_w, key));
     }
 
-    return w_v
+    return w_v.join(" ");
 }
 
-fn decsr(enc: Vec<String>, key: i32) -> Vec<String> {
+fn decsr(enc: &str, key: i32) -> String {
     let mut fin_v: Vec<String> = Vec::new();
 
-    for pt in enc {
+    for pt in enc.split(" ") {
         fin_v.push(decsr_w(pt.trim(), key));
     }
 
-    return fin_v;
+    return fin_v.join(" ");
 }
