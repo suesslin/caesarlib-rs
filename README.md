@@ -1,4 +1,8 @@
-# Caesar
+# 👑 Caesar
 Caesar is a ['Caesar Cipher'](https://en.wikipedia.org/wiki/Caesar_cipher) command-line application written in Rust. 
 
-##How To Run
+##🏃 How To Run
+
+## 👨🏻‍💻 Creator
+
+* [Luke Muller](https://twitter.com/betaluki)
