@@ -6,7 +6,7 @@ fn main() {
     let mut w = String::new();
     let mut k = String::new();
 
-    let mut m2: i8;
+    let m2: i8;
 
     loop {
         println!("Choose one of these methods\n0 > Encipher\n1 > Decipher");
