@@ -1,8 +1,8 @@
-# 👑 Caesar
-Caesar is a ['Caesar Cipher'](https://en.wikipedia.org/wiki/Caesar_cipher) command-line application written in Rust. 
+# Caesar
 
-##🏃 How To Run
+## Introduction
+A **WIP** library for Rust.
 
-## 👨🏻‍💻 Creator
-
-* [Luke Muller](https://twitter.com/betaluki)
+## Background Information
+This was inspired by my [Caesar Cipher algorithm
+implentation in Swift](https://github.com/luki/CaesarCy/blob/master/Caesar/Algorithms.swift) used in my [iOS application CaesarCy](https://github.com/luki/CaesarCy)
