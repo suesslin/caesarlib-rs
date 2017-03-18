@@ -73,6 +73,28 @@ fn encipher(offset: i32, message: &str) -> String {
     new_string
 }
 
+fn decipher(offset: i32, message: &str) -> String {
+    let base = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    let cipher_seq = shift_seq(offset, base.to_string()).all_chars();
+    let base_seq = base.to_string().all_chars();
+
+    let mut new_string = String::new();
+
+    for achar in message.to_string().all_chars() {
+        let mut found = false;
+        for i in 0..cipher_seq.last_pos() {
+            if achar == cipher_seq[i] {
+                new_string += &base_seq[i];
+                found  = true;
+            }
+        }
+        if !found {
+            new_string += &achar;
+        }
+    }
+    new_string
+}
+
 fn main() {
     // PROBLEMS:
     // - Doesn't add Everything before starting point to the end (PROBLEM part of 3)
@@ -82,5 +104,5 @@ fn main() {
 
     let shift = shift_seq(30, "ABCDEFGHIJKLMNOPQRSTUVWXYZ".to_string());
     let shiftString = encipher(2, "Konnichiwa");
-    println!("{}", shiftString);
+    println!("{}", decipher(2, &shiftString));
 }
