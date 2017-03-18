@@ -37,18 +37,40 @@ fn shift_seq(offset: i32, base_seq: String) -> String {
     let seq_vec: Vec<String> = base_seq.all_chars();
 
     if offset >= seq_vec.len() as i32 {
-        println!("Here's a problem!");
         new_seq = vec_shift(&seq_vec, (offset as usize) % seq_vec.len(), seq_vec.last_pos());
         if offset % seq_vec.len() as i32 != 0 {
-            new_seq = format!("{}{}", new_seq, vec_shift(&seq_vec, 0, (offset as usize) % seq_vec.len() - 1))
+            new_seq = format!("{}{}", new_seq, vec_shift(&seq_vec, 0, (offset as usize) % seq_vec.len() - 1));
         }
     } else {
         new_seq = vec_shift(&seq_vec, offset as usize, seq_vec.last_pos());
         if offset != 0 {
-            new_seq = format!("{}{}", new_seq, vec_shift(&seq_vec, 0, (offset - 1) as usize))
+            new_seq = format!("{}{}", new_seq, vec_shift(&seq_vec, 0, (offset - 1) as usize));
         }
     }
     new_seq
+}
+
+fn encipher(offset: i32, message: &str) -> String {
+    let base = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    let base_seq = base.to_string().all_chars();
+    let new_seq = shift_seq(offset, base.to_string()).all_chars();
+
+    let mut new_string = String::new();
+
+    for achar in message.to_string().all_chars() {
+        let mut found = false;
+        for i in 0..base_seq.last_pos() {
+            if achar == base_seq[i] {
+                new_string += &new_seq[i];
+                found = true;
+            }
+        }
+        if !found {
+            new_string += "achar"
+        }
+    }
+
+    new_string
 }
 
 fn main() {
@@ -59,5 +81,6 @@ fn main() {
     // - In Else part, fix the offset != 0 problem
 
     let shift = shift_seq(30, "ABCDEFGHIJKLMNOPQRSTUVWXYZ".to_string());
-    println!("{}", shift);
+    let shiftString = encipher(2, "Konnichiwa");
+    println!("{}", shiftString);
 }
