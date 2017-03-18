@@ -32,6 +32,16 @@ fn vec_shift(input: &Vec<String>, start: usize) -> String {
     .join("")
 }
 
+fn vec_shift_with_end(input: &Vec<String>, start: usize, end: usize) -> String {
+    input
+    .iter()
+    .enumerate()
+    .filter(|&(i, _)| { i >= start && i <= end })
+    .map(|(i, x)| { x.to_string() })
+    .collect::<Vec<String>>()
+    .join("")
+}
+
 fn shift_seq(offset: i32, base_seq: String) -> String {
     let mut new_seq = String::new();
     let seq_vec: Vec<String> = base_seq.all_chars();
@@ -42,17 +52,18 @@ fn shift_seq(offset: i32, base_seq: String) -> String {
             new_seq = format!("{}{}", new_seq, vec_shift(&seq_vec, 0))
         }
     } else {
-        new_seq = vec_shift(&seq_vec, offset as usize)
-        // if offset != 0 {
-        //     new_seq = format!("{}{}", new_seq, )
-        // }
+        new_seq = vec_shift(&seq_vec, offset as usize);
+        if offset != 0 {
+            new_seq = format!("{}{}", new_seq, vec_shift_with_end(&seq_vec, 0, (offset - 1) as usize))
+        }
     }
     new_seq
 }
 
 fn main() {
     // PROBLEMS:
-    // - Doesn't add Everything before starting point to the end
+    // - Doesn't add Everything before starting point to the end (PROBLEM part of 3)
+    //   With offset over 26 it works again
     // - Doesn't start shifting at 1, but at 2
     // - In Else part, fix the offset != 0 problem
 
