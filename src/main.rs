@@ -13,30 +13,20 @@ impl StringChars<String> for String {
 }
 
 trait VecExtensions<T> {
-    fn last_pos(self) -> usize;
+    fn last_pos(&self) -> usize;
 }
 
 impl VecExtensions<String> for Vec<String> {
-    fn last_pos(self) -> usize {
+    fn last_pos(&self) -> usize {
         self.len() - 1
     }
 }
 
-fn vec_shift(input: &Vec<String>, start: usize) -> String {
+fn vec_shift(input: &Vec<String>, start: usize, end: usize) -> String {
     input
     .iter()
     .enumerate()
-    .filter(|&(i, _)| { i >= start })
-    .map(|(i, x)| { x.to_string() })
-    .collect::<Vec<String>>()
-    .join("")
-}
-
-fn vec_shift_with_end(input: &Vec<String>, start: usize, end: usize) -> String {
-    input
-    .iter()
-    .enumerate()
-    .filter(|&(i, _)| { i >= start && i <= end })
+    .filter(|&(i, _)| { i >= start && i <= end }) // end needed for one case otherwise not
     .map(|(i, x)| { x.to_string() })
     .collect::<Vec<String>>()
     .join("")
@@ -47,14 +37,15 @@ fn shift_seq(offset: i32, base_seq: String) -> String {
     let seq_vec: Vec<String> = base_seq.all_chars();
 
     if offset >= seq_vec.len() as i32 {
-        new_seq = vec_shift(&seq_vec, (offset as usize) % seq_vec.len());
+        println!("Here's a problem!");
+        new_seq = vec_shift(&seq_vec, (offset as usize) % seq_vec.len(), seq_vec.last_pos());
         if offset % seq_vec.len() as i32 != 0 {
-            new_seq = format!("{}{}", new_seq, vec_shift(&seq_vec, 0))
+            new_seq = format!("{}{}", new_seq, vec_shift(&seq_vec, 0, (offset as usize) % seq_vec.len() - 1))
         }
     } else {
-        new_seq = vec_shift(&seq_vec, offset as usize);
+        new_seq = vec_shift(&seq_vec, offset as usize, seq_vec.last_pos());
         if offset != 0 {
-            new_seq = format!("{}{}", new_seq, vec_shift_with_end(&seq_vec, 0, (offset - 1) as usize))
+            new_seq = format!("{}{}", new_seq, vec_shift(&seq_vec, 0, (offset - 1) as usize))
         }
     }
     new_seq
@@ -67,6 +58,6 @@ fn main() {
     // - Doesn't start shifting at 1, but at 2
     // - In Else part, fix the offset != 0 problem
 
-    let shift = shift_seq(3, "ABCDEFGHIJKLMNOPQRSTUVWXYZ".to_string());
+    let shift = shift_seq(30, "ABCDEFGHIJKLMNOPQRSTUVWXYZ".to_string());
     println!("{}", shift);
 }
