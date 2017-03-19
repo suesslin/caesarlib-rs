@@ -50,7 +50,7 @@ fn shift_seq(offset: i32, base_seq: String) -> String {
     new_seq
 }
 
-fn encipher(offset: i32, message: &str) -> String {
+pub fn encipher(offset: i32, message: &str) -> String {
     let base = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     let base_seq = base.to_string().all_chars();
     let new_seq = shift_seq(offset, base.to_string()).all_chars();
@@ -73,7 +73,7 @@ fn encipher(offset: i32, message: &str) -> String {
     new_string
 }
 
-fn decipher(offset: i32, message: &str) -> String {
+pub fn decipher(offset: i32, message: &str) -> String {
     let base = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     let cipher_seq = shift_seq(offset, base.to_string()).all_chars();
     let base_seq = base.to_string().all_chars();
@@ -93,16 +93,4 @@ fn decipher(offset: i32, message: &str) -> String {
         }
     }
     new_string
-}
-
-fn main() {
-    // PROBLEMS:
-    // - Doesn't add Everything before starting point to the end (PROBLEM part of 3)
-    //   With offset over 26 it works again
-    // - Doesn't start shifting at 1, but at 2
-    // - In Else part, fix the offset != 0 problem
-
-    let shift = shift_seq(30, "ABCDEFGHIJKLMNOPQRSTUVWXYZ".to_string());
-    let shiftString = encipher(2, "Konnichiwa");
-    println!("{}", decipher(2, &shiftString));
 }
