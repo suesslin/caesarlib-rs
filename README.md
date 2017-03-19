@@ -1,6 +1,7 @@
 # caesarcy
 Caesar cipher capabilities for Rust.<br>
 [![Current Version](http://meritbadge.herokuapp.com/caesarcy)](https://crates.io/crates/caesarcy)
+[![Build Status](https://travis-ci.org/luki/caesarcy.rs.svg)](https://travis-ci.org/luki/caesarcy.rs)
 
 ## Usage
 Add this to your `Cargo.toml`:
