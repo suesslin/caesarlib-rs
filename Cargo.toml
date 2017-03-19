@@ -1,10 +1,10 @@
 [package]
 name = "caesarlib"
-version = "0.1.1"
-authors = ["Lukas Mueller <lamuller@protonmail.com>"]
+version = "0.1.2"
+authors = ["caesarlib org <lamuller@protonmail.com>"]
 description = "A Caesar-Cipher library for Rust."
 license = "MIT"
-repository = "https://github.com/luki/caesarlib.rs"
+repository = "https://github.com/caesarlib/caesarlib.rs"
 readme = "README.md"
 
 [app]
