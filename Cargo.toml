@@ -1,6 +1,10 @@
 [package]
-name = "caesar"
-version = "0.1.0"
-authors = ["Lukas Andreas Muller <lamuller@protonmail.com>"]
+name = "caesarcy"
+version = "0.1.1"
+authors = ["Lukas Mueller <lamuller@protonmail.com>"]
+description = "A Caesar-Cipher library for Rust."
+license = "MIT"
+repository = "https://github.com/luki/caesarcy.rs"
+readme = "README.md"
 
 [dependencies]
