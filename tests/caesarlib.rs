@@ -24,6 +24,16 @@ mod tests {
         assert_eq!("Foo:bar.", decipher(13, &enciphered));
     }
     #[test]
+    fn encipher_offset_cannot_be_negative() {
+        let enciphered = encipher(-13, "Foo:bar.");
+        assert_ne!("Foo:bar.", &enciphered);
+    }
+    #[test]
+    fn decipher_offset_cannot_be_negative() {
+        let deciphered = encipher(-13, "Foo:bar.");
+        assert_ne!("Foo:bar.", &deciphered);
+    }
+    #[test]
     fn random_enciphered_text_can_be_deciphered() {
         let test_word = "FooBar";
         let (offset, enciphered) = rdm_encipher(test_word);
