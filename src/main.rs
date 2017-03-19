@@ -11,37 +11,39 @@ use std::env;
 use std::io::Write;
 use std::process;
 
+static HELP: &'static str = "USAGE: caesarlib {encipher|decipher} [Text]";
+
+fn handle_cli_params(mode : &String, offset : i32, text : String) -> i32 {
+    if mode == "encipher" {
+        println!("{}", encipher(offset, &text));
+    } else if mode == "decipher" {
+        println!("{}", decipher(offset, &text));
+    } else {
+        writeln!(&mut std::io::stderr(), "{}", HELP).unwrap();
+        return 1;
+    }
+    return 0;
+}
+
 // Demo
 fn main() {
-    let help = "USAGE: caesarlib {encipher|decipher} [Text]";
     let args: Vec<_> = env::args().collect();
     let argc: usize = args.len();
 
     if argc == 1 {
-        writeln!(&mut std::io::stderr(), "{}", help).unwrap();
+        writeln!(&mut std::io::stderr(), "{}", HELP).unwrap();
         process::exit(1);
     } else if argc == 2 {
+        let mode = args[1].clone();
         let stdin = io::stdin();
-        if args[1] == "encipher" {
-            for line in stdin.lock().lines() {
-                println!("{}", encipher(13, &line.unwrap()));
-            }
-        } else if args[1] == "decipher" {
-            for line in stdin.lock().lines() {
-                println!("{}", decipher(13, &line.unwrap()));
-            }
-        } else {
-            writeln!(&mut std::io::stderr(), "{}", help).unwrap();
-            process::exit(1);
+        let mut ret = 0;
+        for line in stdin.lock().lines() {
+            ret = handle_cli_params(&mode, 13, line.unwrap());
         }
+        process::exit(ret);
     } else if argc == 3 {
-        if args[1] == "encipher" {
-            println!("{}", encipher(13, &args[2]));
-        } else if args[1] == "decipher" {
-            println!("{}", decipher(13, &args[2]));
-        } else {
-            writeln!(&mut std::io::stderr(), "{}", help).unwrap();
-            process::exit(1);
-        }
+        let mode = args[1].clone();
+        let text = args[2].clone();
+        process::exit(handle_cli_params(&mode, 13, text));
     }
 }
