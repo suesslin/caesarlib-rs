@@ -40,13 +40,13 @@ fn vec_shift(input: &Vec<String>, start: usize, end: usize) -> String {
     .join("")
 }
 
-fn shift_seq(offset: i32, base_seq: String) -> String {
+fn shift_seq(offset: u16, base_seq: String) -> String {
     let mut new_seq;
     let seq_vec: Vec<String> = base_seq.all_chars();
 
-    if offset >= seq_vec.len() as i32 {
+    if offset >= seq_vec.len() as u16 {
         new_seq = vec_shift(&seq_vec, (offset as usize) % seq_vec.len(), seq_vec.last_pos());
-        if offset % seq_vec.len() as i32 != 0 {
+        if offset % seq_vec.len() as u16 != 0 {
             new_seq = format!("{}{}", new_seq, vec_shift(&seq_vec, 0, (offset as usize) % seq_vec.len() - 1));
         }
     } else {
@@ -58,7 +58,7 @@ fn shift_seq(offset: i32, base_seq: String) -> String {
     new_seq
 }
 
-pub fn encipher(offset: i32, message: &str) -> String {
+pub fn encipher(offset: u16, message: &str) -> String {
     let base = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     let base_seq = base.to_string().all_chars();
     let new_seq = shift_seq(offset, base.to_string()).all_chars();
@@ -81,7 +81,7 @@ pub fn encipher(offset: i32, message: &str) -> String {
     new_string
 }
 
-pub fn decipher(offset: i32, message: &str) -> String {
+pub fn decipher(offset: u16, message: &str) -> String {
     let base = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     let cipher_seq = shift_seq(offset, base.to_string()).all_chars();
     let base_seq = base.to_string().all_chars();
@@ -103,9 +103,9 @@ pub fn decipher(offset: i32, message: &str) -> String {
     new_string
 }
 
-pub fn rdm_encipher(message: &str) -> (i32, String) {
+pub fn rdm_encipher(message: &str) -> (u16, String) {
     let mut rng = rand::thread_rng();
-    let offset = rng.gen::<i32>();
+    let offset = rng.gen::<u16>();
 
     (offset, encipher(offset, message))
 }

@@ -21,12 +21,12 @@ use caesarlib::*;
 
 ## Methods
 ```rust
-fn encipher(offset: i32, message: &str) -> String;
+fn encipher(offset: u16, message: &str) -> String;
 
-fn decipher(offset: i32, message: &str) -> String;
+fn decipher(offset: u16, message: &str) -> String;
 
 // Returns randomly-generated offset and enciphered text
-fn rdm_encipher(message: &str) -> (i32, String)
+fn rdm_encipher(message: &str) -> (u16, String)
 ```
 
 ## CLI tool
