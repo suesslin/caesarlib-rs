@@ -33,8 +33,7 @@ fn vec_shift(input: &Vec<String>, start: usize, end: usize) -> String {
 }
 
 fn shift_seq(offset: i32, base_seq: String) -> String {
-    #[warn(unused_assignments)]
-    let mut new_seq = String::new();
+    let mut new_seq;
     let seq_vec: Vec<String> = base_seq.all_chars();
 
     if offset >= seq_vec.len() as i32 {
