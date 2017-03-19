@@ -27,12 +27,13 @@ fn vec_shift(input: &Vec<String>, start: usize, end: usize) -> String {
     .iter()
     .enumerate()
     .filter(|&(i, _)| { i >= start && i <= end }) // end needed for one case otherwise not
-    .map(|(i, x)| { x.to_string() })
+    .map(|(_, x)| { x.to_string() })
     .collect::<Vec<String>>()
     .join("")
 }
 
 fn shift_seq(offset: i32, base_seq: String) -> String {
+    #[warn(unused_assignments)]
     let mut new_seq = String::new();
     let seq_vec: Vec<String> = base_seq.all_chars();
 
