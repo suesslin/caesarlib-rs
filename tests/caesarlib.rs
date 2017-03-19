@@ -1,6 +1,6 @@
-extern crate caesarcy;
+extern crate caesarlib;
 
-use caesarcy::{encipher, decipher};
+use caesarlib::{encipher, decipher};
 
 
 #[cfg(test)]

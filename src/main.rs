@@ -1,6 +1,6 @@
-extern crate caesarcy;
+extern crate caesarlib;
 
-use caesarcy::{encipher,decipher};
+use caesarlib::{encipher,decipher};
 use std::io;
 use std::io::prelude::*;
 use std::env;
@@ -9,10 +9,10 @@ use std::process;
 
 // Demo
 fn main() {
-    let help = "USAGE: caesarcy {encipher|decipher} [Text]";
+    let help = "USAGE: caesarlib {encipher|decipher} [Text]";
     let args: Vec<_> = env::args().collect();
     let argc: usize = args.len();
-    
+
     if argc == 1 {
         writeln!(&mut std::io::stderr(), "{}", help).unwrap();
         process::exit(1);

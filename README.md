@@ -1,22 +1,22 @@
-# caesarcy
+# caesarlib
 Caesar cipher capabilities for Rust.<br>
-[![Current Version](http://meritbadge.herokuapp.com/caesarcy)](https://crates.io/crates/caesarcy)
-[![Build Status](https://travis-ci.org/luki/caesarcy.rs.svg)](https://travis-ci.org/luki/caesarcy.rs)
+[![Current Version](http://meritbadge.herokuapp.com/caesarlib)](https://crates.io/crates/caesarlib)
+[![Build Status](https://travis-ci.org/luki/caesarlib.rs.svg)](https://travis-ci.org/luki/caesarlib.rs)
 
 ## Usage
 Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-caesarcy = "0.1.1"
+caesarlib = "0.1.1"
 ```
 
 and this to your crate root:
 
 ```rust
-extern crate caesarcy;
+extern crate caesarlib;
 
-use caesarcy::*;
+use caesarlib::*;
 ```
 
 ## Methods
@@ -27,8 +27,8 @@ fn decipher(offset: i32, message: &str) -> String;
 ```
 
 ## Author
-* [Lukas Mueller](https://crates.io/crates/caesarcy)
+* [Lukas Mueller](https://crates.io/crates/caesarlib)
 
 ## Background
 This was inspired by my [Caesar Cipher algorithm
-implentation in Swift](https://github.com/luki/CaesarCy/blob/master/Caesar/Algorithms.swift) used in my [iOS application CaesarCy](https://github.com/luki/CaesarCy)
+implentation in Swift](https://github.com/luki/caesarlib/blob/master/Caesar/Algorithms.swift) used in my [iOS application caesarlib](https://github.com/luki/caesarlib)
