@@ -7,10 +7,6 @@ license = "MIT"
 repository = "https://github.com/caesarlib/caesarlib.rs"
 readme = "README.md"
 
-[app]
-name = "caesar-cli"
-path = "src/main.rs"
-
 [dependencies]
 rand = "0.3.15"
 clap = "2"
