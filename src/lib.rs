@@ -67,7 +67,7 @@ pub fn encipher(offset: i32, message: &str) -> String {
             }
         }
         if !found {
-            new_string += "achar"
+            new_string += &achar;
         }
     }
 
