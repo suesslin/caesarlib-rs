@@ -29,6 +29,21 @@ fn decipher(offset: i32, message: &str) -> String;
 fn rdm_encipher(message: &str) -> (i32, String)
 ```
 
+## CLI tool
+
+You can try the lib using the `caesar-cli` tool:
+
+```sh
+$ caesarlib encipher "Carolus Magnus" --offset 87
+OmDAxGE YmszGE
+
+$ caesarlib decipher "OmDAxGE YmszGE" --offset 87
+Carolus Magnus
+
+$ caesarlib encipher "Carolus Magnus" --offset 87 | caesarlib decipher --offset 87
+Carolus Magnus
+```
+
 ## Contributors
 * [Lukas Mueller](https://github.com/luki)
 * [Rémy Hubscher](https://github.com/natim)
