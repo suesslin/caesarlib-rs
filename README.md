@@ -1,7 +1,7 @@
 # caesarlib
 Caesar cipher capabilities for Rust.<br>
 [![Current Version](http://meritbadge.herokuapp.com/caesarlib)](https://crates.io/crates/caesarlib)
-[![Build Status](https://travis-ci.org/luki/caesarlib.rs.svg)](https://travis-ci.org/luki/caesarlib.rs)
+[![Build Status](https://travis-ci.org/caesarlib/caesarlib.rs.svg)](https://travis-ci.org/caesarlib/caesarlib.rs)
 
 ## Usage
 Add this to your `Cargo.toml`:
