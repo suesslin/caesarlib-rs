@@ -6,7 +6,7 @@
 extern crate clap;
 extern crate caesarlib;
 
-use caesarlib::{encipher,decipher};
+use caesarlib::{encipher,decipher,rdm_encipher};
 use clap::{Arg, App};
 use std::io;
 use std::io::prelude::*;
@@ -18,10 +18,15 @@ fn main() {
     let matches = App::new("caesar-cli")
         .version(crate_version!())
         .about("Demo the caesarlib library with a simple CLI tool.")
+        .arg(Arg::with_name("random")
+             .short("r")
+             .long("random")
+             .conflicts_with("MODE")
+             .help("Choose a random offset and return the offset as the error code."))
         .arg(Arg::with_name("MODE")
              .help("The action you want to do on the text.")
              .possible_values(&["encipher", "decipher"])
-             .required(true)
+             .required_unless("random")
              .index(1))
         .arg(Arg::with_name("offset")
              .short("s")
@@ -30,7 +35,7 @@ fn main() {
              .help("Set the offset of the caesar code.")
              .takes_value(true))
         .arg(Arg::with_name("TEXT")
-             .index(2)
+             .last(true)
              .help("The text to process. If not present, will read from stdin."))
         .get_matches();
 
@@ -45,7 +50,14 @@ fn main() {
     }
 
 
-    let offset_parser = matches.value_of("offset").unwrap().parse::<i32>();
+    let offset_parser = matches.value_of("offset").unwrap().parse::<u16>();
+
+    if matches.is_present("random") {
+        let (offset, content) = rdm_encipher(&lines.join("\n"));
+        println!("{} : {} : {}", content, lines.join("\n"), offset);
+        process::exit(offset as i32);
+
+    }
 
     match offset_parser {
         Ok(offset) => {

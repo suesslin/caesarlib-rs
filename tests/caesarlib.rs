@@ -29,4 +29,10 @@ mod tests {
         let (offset, enciphered) = rdm_encipher(test_word);
         assert_eq!(test_word, decipher(offset, &enciphered));
     }
+    #[test]
+    fn random_enciphered_text_different_from_input() {
+        let test_word = "FooBar";
+        let (_, enciphered) = rdm_encipher(test_word);
+        assert_ne!(test_word, &enciphered);
+    }
 }
