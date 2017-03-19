@@ -8,7 +8,8 @@ mod tests {
     use super::*;
     #[test]
     fn ciphered_text_can_be_deciphered() {
-        assert_eq!("Toto", decipher(13, &encipher(13, "Toto")));
+        let enciphered = encipher(13, "Toto");
+        assert_eq!("Toto", decipher(13, &enciphered));
     }
     #[test]
     fn ciphered_text_is_different_with_regards_to_offset() {
@@ -16,6 +17,7 @@ mod tests {
     }
     #[test]
     fn ciphered_text_can_contains_unknown_chars() {
-        assert_eq!("Foo:bar.", decipher(13, &encipher(13, "Foo:bar.")));
+        let enciphered = encipher(13, "Foo:bar.");
+        assert_eq!("Foo:bar.", decipher(13, &enciphered));
     }
 }
