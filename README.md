@@ -35,4 +35,4 @@ fn rdm_encipher(message: &str) -> (i32, String)
 
 ## Background
 This was inspired by my [Caesar Cipher algorithm
-implentation in Swift](https://github.com/luki/caesarlib/blob/master/Caesar/Algorithms.swift) used in my [iOS application caesarlib](https://github.com/luki/caesarlib)
+implentation in Swift](https://github.com/luki/CaesarCy/blob/master/Caesar/Algorithms.swift) used in my [iOS application caesarlib](https://github.com/luki/CaesarCy)
