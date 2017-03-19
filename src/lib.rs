@@ -2,6 +2,10 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
+extern crate rand;
+
+use rand::Rng;
+
 trait StringChars<T> {
     fn all_chars(self) -> Vec<T>;
 }
@@ -97,4 +101,11 @@ pub fn decipher(offset: i32, message: &str) -> String {
         }
     }
     new_string
+}
+
+pub fn rdm_encipher(message: &str) -> (i32, String) {
+    let mut rng = rand::thread_rng();
+    let offset = rng.gen::<i32>();
+
+    (offset, encipher(offset, message))
 }
