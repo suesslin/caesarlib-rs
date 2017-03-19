@@ -26,8 +26,9 @@ fn encipher(offset: i32, message: &str) -> String;
 fn decipher(offset: i32, message: &str) -> String;
 ```
 
-## Author
-* [Lukas Mueller](https://crates.io/crates/caesarlib)
+## Contributors
+* [Lukas Mueller](https://github.com/luki)
+* [Rémy Hubscher](https://github.com/natim)
 
 ## Background
 This was inspired by my [Caesar Cipher algorithm
