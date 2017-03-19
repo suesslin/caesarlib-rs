@@ -7,7 +7,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-caesarcy = "0.1.0"
+caesarcy = "0.1.1"
 ```
 
 and this to your crate root:
