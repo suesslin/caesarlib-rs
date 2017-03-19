@@ -24,6 +24,9 @@ use caesarlib::*;
 fn encipher(offset: i32, message: &str) -> String;
 
 fn decipher(offset: i32, message: &str) -> String;
+
+// Returns randomly-generated offset and enciphered text
+fn rdm_encipher(message: &str) -> (i32, String)
 ```
 
 ## Contributors
