@@ -19,21 +19,22 @@ fn main() {
         .version(crate_version!())
         .about("Demo the caesarlib library with a simple CLI tool.")
         .arg(Arg::with_name("MODE")
-            .help("The action you want to apply on the input text.")
-            .possible_values(&["encipher", "decipher"])
-            .required(true)
-            .index(1))
+             .help("The action you want to do on the text.")
+             .required(true)
+             .possible_values(&["encipher", "decipher", "random"])
+             .index(1))
         .arg(Arg::with_name("OFFSET")
-            .required_unless("random")
-            .help("Set the offset of the caesar code.")
-            .takes_value(true))
+             .short("s")
+             .long("offset")
+             .default_value("13")
+             .help("Set the offset of the caesar code.")
+             .takes_value(true))
         .arg(Arg::with_name("TEXT")
-            .required(true)
-            .help("The text to process. If not present, will read from stdin."))
+             .index(2)
+             .help("The text to process. If not present, will read from stdin."))
         .get_matches();
 
     let mut lines: Vec<String> = Vec::new();
-
     if matches.is_present("TEXT") {
         lines.push(String::from(matches.value_of("TEXT").unwrap()));
     } else {
@@ -43,7 +44,7 @@ fn main() {
         }
     }
 
-    // Parse Argument Input to Number (=Offset )
+    // Parse Offset Argument to Number
     let parsed_offset = match matches.value_of("OFFSET").unwrap().parse::<u16>() {
         Ok(num) => num,
         Err(why) => {
@@ -51,13 +52,16 @@ fn main() {
             process::exit(2);
         }
     };
-
     match matches.value_of("MODE").unwrap() {
         "encipher" => {
-            println!("{}", encipher(parsed_offset, &lines.join("\n")))
+            println!("{}", encipher(parsed_offset, &lines.join("\n")));
         },
         "decipher" => {
-            println!("{}", decipher(parsed_offset, &lines.join("\n")))
+            println!("{}", decipher(parsed_offset, &lines.join("\n")));
+        },
+        "random" => {
+            let (offset, content) = rdm_encipher(&lines.join("\n"));
+            println!("{}: {}", offset, content);
         },
         _ => unreachable!()
     }
