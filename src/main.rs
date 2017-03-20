@@ -18,51 +18,53 @@ fn main() {
     let matches = App::new("caesar-cli")
         .version(crate_version!())
         .about("Demo the caesarlib library with a simple CLI tool.")
-        .arg(Arg::with_name("MODE")
-            .help("The action you want to apply on the inputed text.")
-            .required(true)
-            .possible_values(&["encipher", "decipher", "random"])
-            .index(1))
+        .arg(Arg::with_name("RANDOM")
+            .long("random")
+            .short("rdm"))
+        .arg(Arg::with_name("METHOD")
+            .long("method")
+            .short("m")
+            .possible_values(&["encipher", "decipher"])
+            .takes_value(true)
+            .required_unless("RANDOM"))
         .arg(Arg::with_name("OFFSET")
-            .short("s")
             .long("offset")
-            .default_value("13")
-            .help("Set the offset of the caesar code.")
-            .takes_value(true))
+            .short("off")
+            .takes_value(true)
+            .required_unless("RANDOM"))
         .arg(Arg::with_name("TEXT")
-            .index(2)
-            .help("The text to process. If not present, will read from stdin."))
+            .long("text")
+            .short("txt")
+            .takes_value(true)
+            .required(true))
         .get_matches();
 
-    let mut lines: Vec<String> = Vec::new();
-    if matches.is_present("TEXT") {
-        lines.push(String::from(matches.value_of("TEXT").unwrap()));
-    } else {
-        let stdin = io::stdin();
-        for line in stdin.lock().lines() {
-            lines.push(line.unwrap());
+    let input_text = matches.value_of("TEXT").unwrap();
+
+    let mut result;
+
+    match matches.is_present("RANDOM") {
+        true => {
+            result = rdm_encipher(input_text);
+        },
+        false => {
+            let method = matches.value_of("METHOD").unwrap();
+            let parsed_offset = match matches.value_of("OFFSET").unwrap().parse::<u16>() {
+                Ok(num) => num,
+                Err(why) => {
+                    writeln!(&mut std::io::stderr(), "Offset should be a number: {}", why).unwrap();
+                    process::exit(2);
+                }
+            };
+            if method == "encipher" {
+                result = (parsed_offset, encipher(parsed_offset, method));
+            } else if method == "decipher" {
+                result = (parsed_offset, decipher(parsed_offset, method));
+            } else {
+                panic!("An unknown method has been chosen.")
+            }
         }
     }
 
-    // Parse Offset Argument to Number
-    let parsed_offset = match matches.value_of("OFFSET").unwrap().parse::<u16>() {
-        Ok(num) => num,
-        Err(why) => {
-            writeln!(&mut std::io::stderr(), "Offset should be a number: {}", why).unwrap();
-            process::exit(2);
-        }
-    };
-    match matches.value_of("MODE").unwrap() {
-        "encipher" => {
-            println!("{}", encipher(parsed_offset, &lines.join("\n")))
-        },
-        "decipher" => {
-            println!("{}", decipher(parsed_offset, &lines.join("\n")))
-        },
-        "random" => {
-            let (offset, content) = rdm_encipher(&lines.join("\n"));
-            println!("{}: {}", offset, content)
-        },
-        _ => unreachable!()
-    }
+    println!("Result: {}\nOffset: {}", result.0, result.1)
 }
