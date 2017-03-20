@@ -19,7 +19,7 @@ fn main() {
         .version(crate_version!())
         .about("Demo the caesarlib library with a simple CLI tool.")
         .arg(Arg::with_name("MODE")
-            .help("The action you want to do on the text.")
+            .help("The action you want to apply on the inputed text.")
             .required(true)
             .possible_values(&["encipher", "decipher", "random"])
             .index(1))
@@ -54,14 +54,14 @@ fn main() {
     };
     match matches.value_of("MODE").unwrap() {
         "encipher" => {
-            println!("{}", encipher(parsed_offset, &lines.join("\n")));
+            println!("{}", encipher(parsed_offset, &lines.join("\n")))
         },
         "decipher" => {
-            println!("{}", decipher(parsed_offset, &lines.join("\n")));
+            println!("{}", decipher(parsed_offset, &lines.join("\n")))
         },
         "random" => {
             let (offset, content) = rdm_encipher(&lines.join("\n"));
-            println!("{}: {}", offset, content);
+            println!("{}: {}", offset, content)
         },
         _ => unreachable!()
     }
