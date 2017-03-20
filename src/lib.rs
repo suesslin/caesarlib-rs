@@ -45,14 +45,12 @@ fn shift_seq(offset: u16, base_seq: String) -> String {
     let seq_vec: Vec<String> = base_seq.all_chars();
 
     if offset >= seq_vec.len() as u16 - 2 {
-        println!("There!");
         let new_offset = offset as usize % (seq_vec.len() - 2);
         new_seq = vec_shift(&seq_vec, new_offset + 1, seq_vec.last_pos());
         if new_offset != 0 {
             new_seq = format!("{}{}", new_seq, vec_shift(&seq_vec, 0, offset as usize));
         }
     } else {
-        println!("Here!");
         new_seq = vec_shift(&seq_vec, offset as usize + 1, seq_vec.last_pos());
         if offset != 0 {
             new_seq = format!("{}{}", new_seq, vec_shift(&seq_vec, 0, offset as usize));
