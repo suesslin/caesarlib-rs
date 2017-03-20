@@ -8,7 +8,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-caesarlib = "0.1.1"
+caesarlib = "0.1.2"
 ```
 
 and this to your crate root:
