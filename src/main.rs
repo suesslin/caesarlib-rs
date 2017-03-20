@@ -40,6 +40,7 @@ fn main() {
         .get_matches();
 
     let input_text = matches.value_of("TEXT").unwrap();
+    println!("{}", input_text);
 
     let mut result;
 
@@ -57,9 +58,9 @@ fn main() {
                 }
             };
             if method == "encipher" {
-                result = (parsed_offset, encipher(parsed_offset, method));
+                result = (parsed_offset, encipher(parsed_offset, input_text));
             } else if method == "decipher" {
-                result = (parsed_offset, decipher(parsed_offset, method));
+                result = (parsed_offset, decipher(parsed_offset, input_text));
             } else {
                 panic!("An unknown method has been chosen.")
             }

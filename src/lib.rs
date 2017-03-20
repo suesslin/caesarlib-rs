@@ -50,9 +50,9 @@ fn shift_seq(offset: u16, base_seq: String) -> String {
             new_seq = format!("{}{}", new_seq, vec_shift(&seq_vec, 0, (offset as usize) % seq_vec.len() - 1));
         }
     } else {
-        new_seq = vec_shift(&seq_vec, offset as usize, seq_vec.last_pos());
+        new_seq = vec_shift(&seq_vec, offset as usize + 1, seq_vec.last_pos());
         if offset != 0 {
-            new_seq = format!("{}{}", new_seq, vec_shift(&seq_vec, 0, (offset - 1) as usize));
+            new_seq = format!("{}{}", new_seq, vec_shift(&seq_vec, 0, offset as usize));
         }
     }
     new_seq
