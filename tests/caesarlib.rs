@@ -19,6 +19,14 @@ mod tests {
         assert_ne!(encipher(13, "FooBar"), encipher(14, "FooBar"));
     }
     #[test]
+    fn ciphered_text_with_offset_0_is_message() {
+        assert_eq!(encipher(0, "FooBar"), "FooBar");
+    }
+    #[test]
+    fn ciphered_text_with_offset_1_is_message() {
+        assert_eq!(encipher(1, "FooBar"), "GppCbs");
+    }
+    #[test]
     fn ciphered_text_can_contains_unknown_chars() {
         let enciphered = encipher(13, "Foo:bar.");
         assert_eq!("Foo:bar.", decipher(13, &enciphered));
