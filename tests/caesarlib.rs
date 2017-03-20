@@ -23,8 +23,16 @@ mod tests {
         assert_eq!(encipher(0, "FooBar"), "FooBar");
     }
     #[test]
-    fn ciphered_text_with_offset_1_is_message() {
+    fn ciphered_text_with_offset_1_is_ciphered() {
         assert_eq!(encipher(1, "FooBar"), "GppCbs");
+    }
+    #[test]
+    fn deciphered_text_with_offset_0_is_message() {
+        assert_eq!(decipher(0, "FooBar"), "FooBar");
+    }
+    #[test]
+    fn deciphered_text_with_offset_1_is_deciphered() {
+        assert_eq!(decipher(0, "FooBar"), "EnnAzq");
     }
     #[test]
     fn ciphered_text_can_contains_unknown_chars() {
