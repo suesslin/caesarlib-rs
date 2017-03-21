@@ -38,8 +38,8 @@ fn main() {
         .get_matches();
 
     let input_text = matches.value_of("TEXT").unwrap();
-  
-    let mut result;
+
+    let result;
 
     match matches.is_present("RANDOM") {
         true => {
