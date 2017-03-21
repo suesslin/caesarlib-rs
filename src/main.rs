@@ -64,5 +64,5 @@ fn main() {
         }
     }
 
-    println!("Result: {}\nOffset: {}", result.0, result.1)
+    println!("Result: {}\nWith Offset: {}", result.1, result.0)
 }
