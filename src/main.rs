@@ -8,8 +8,6 @@ extern crate caesarlib;
 
 use caesarlib::{encipher,decipher,rdm_encipher};
 use clap::{Arg, App};
-use std::io;
-use std::io::prelude::*;
 use std::io::Write;
 use std::process;
 
@@ -41,7 +39,7 @@ fn main() {
 
     let input_text = matches.value_of("TEXT").unwrap();
     
-    let mut result;
+    let result;
 
     match matches.is_present("RANDOM") {
         true => {
