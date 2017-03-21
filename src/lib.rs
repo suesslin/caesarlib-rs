@@ -40,22 +40,21 @@ fn vec_shift(input: &Vec<String>, start: usize, end: usize) -> String {
     .join("")
 }
 
-fn shift_seq(offset: u16, base_seq: String) -> String {
+fn shift_seq(offset: u16, base_seq: &str) -> String {
     let mut new_seq;
-    let seq_vec: Vec<String> = base_seq.all_chars();
+    let seq_vec: Vec<String> = base_seq.to_string().all_chars();
 
     if offset >= seq_vec.len() as u16 - 2 {
         let new_offset = offset as usize % (seq_vec.len() - 2);
         new_seq = vec_shift(&seq_vec, new_offset + 1, seq_vec.last_pos());
         if new_offset != 0 {
-            new_seq = format!("{}{}", new_seq, vec_shift(&seq_vec, 0, offset as usize));
+            new_seq = format!("{}{}", new_seq, vec_shift(&seq_vec, 0, new_offset));
         }
     } else {
         new_seq = vec_shift(&seq_vec, offset as usize + 1, seq_vec.last_pos());
         if offset != 0 {
             new_seq = format!("{}{}", new_seq, vec_shift(&seq_vec, 0, offset as usize));
         }
-        println!("{}", new_seq);
     }
     new_seq
 }
@@ -63,7 +62,7 @@ fn shift_seq(offset: u16, base_seq: String) -> String {
 pub fn encipher(offset: u16, message: &str) -> String {
     let base = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     let base_seq = base.to_string().all_chars();
-    let new_seq = shift_seq(offset, base.to_string()).all_chars();
+    let new_seq = shift_seq(offset, base).all_chars();
 
     let mut new_string = String::new();
 
@@ -85,7 +84,7 @@ pub fn encipher(offset: u16, message: &str) -> String {
 
 pub fn decipher(offset: u16, message: &str) -> String {
     let base = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    let cipher_seq = shift_seq(offset, base.to_string()).all_chars();
+    let cipher_seq = shift_seq(offset, base).all_chars();
     let base_seq = base.to_string().all_chars();
 
     let mut new_string = String::new();
@@ -95,7 +94,8 @@ pub fn decipher(offset: u16, message: &str) -> String {
         for i in 0..cipher_seq.last_pos() {
             if achar == cipher_seq[i] {
                 new_string += &base_seq[i];
-                found  = true;
+                println!("at {}, caesar {} entspricht {} base", i, cipher_seq[i], base_seq[i]);
+                found = true;
             }
         }
         if !found {
@@ -108,6 +108,5 @@ pub fn decipher(offset: u16, message: &str) -> String {
 pub fn rdm_encipher(message: &str) -> (u16, String) {
     let mut rng = rand::thread_rng();
     let offset = rng.gen::<u16>();
-    println!("{}", offset);
     (offset, encipher(offset, message))
 }
