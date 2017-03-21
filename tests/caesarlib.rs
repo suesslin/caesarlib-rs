@@ -30,10 +30,10 @@ mod tests {
     fn deciphered_text_with_offset_0_is_message() {
         assert_eq!(decipher(0, "FooBar"), "FooBar");
     }
-    // #[test]
-    // fn deciphered_text_with_offset_1_is_deciphered() {
-    //     assert_eq!(decipher(1, "GppCbs"), "GppCbs");
-    // }
+    #[test]
+    fn deciphered_text_with_offset_1_is_deciphered() {
+        assert_eq!(decipher(1, "GppCbs"), "FooBar");
+    }
     #[test]
     fn ciphered_text_can_contains_unknown_chars() {
         let enciphered = encipher(13, "Foo:bar.");
