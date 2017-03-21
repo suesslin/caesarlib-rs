@@ -34,15 +34,15 @@ fn rdm_encipher(message: &str) -> (u16, String)
 You can try the lib using the `caesar-cli` tool:
 
 ```sh
-$ cargo run -- --method encipher --offset 87 --text "Carolus Magnus"
+$ caesarlib --method encipher --offset 87 --text "Carolus Magnus"
 Result: lJaXUdb vJPWdb
 With Offset: 87
 
-$ cargo run -- --method decipher --offset 87 —text "lJaXUdb vJPWdb"
+$ caesarlib --method decipher --offset 87 —text "lJaXUdb vJPWdb"
 Result: Carolus Magnus
 With Offset: 87
 
-$ cargo run -- --random --text "Carolus Magnus"
+$ caesarlib --random --text "Carolus Magnus"
 Result: qOfcZig AOUbig
 With Offset: 51312
 ```
