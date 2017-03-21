@@ -38,8 +38,8 @@ fn main() {
         .get_matches();
 
     let input_text = matches.value_of("TEXT").unwrap();
-  
-    let mut result;
+
+    let result;
 
     match matches.is_present("RANDOM") {
         true => {
@@ -64,5 +64,5 @@ fn main() {
         }
     }
 
-    println!("Result: {}\nOffset: {}", result.0, result.1)
+    println!("Result: {}\nWith Offset: {}", result.1, result.0)
 }
