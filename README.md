@@ -43,8 +43,8 @@ Result: Carolus Magnus
 With Offset: 87
 
 $ cargo run -- --random --text "Carolus Magnus"
-Result: oMdaXge yMSZge
-With Offset: xyz
+Result: qOfcZig AOUbig
+With Offset: 51312
 ```
 
 ## Contributors
