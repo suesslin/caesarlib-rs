@@ -94,7 +94,6 @@ pub fn decipher(offset: u16, message: &str) -> String {
         for i in 0..cipher_seq.last_pos() {
             if achar == cipher_seq[i] {
                 new_string += &base_seq[i];
-                println!("at {}, caesar {} entspricht {} base", i, cipher_seq[i], base_seq[i]);
                 found = true;
             }
         }
