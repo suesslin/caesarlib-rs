@@ -1,6 +1,6 @@
 [package]
 name = "caesarlib"
-version = "0.1.3"
+version = "0.1.4"
 authors = ["caesarlib org <lamuller@protonmail.com>"]
 description = "A Caesar-Cipher library for Rust."
 license = "MIT"

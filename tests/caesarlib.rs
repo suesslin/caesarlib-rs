@@ -54,7 +54,12 @@ mod tests {
 
     #[test]
     fn custom_base_sequence_correct_encipherd_and_deciphered() {
-        let base = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".chars().rev().collect::<String>();
+        let base =
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+            .chars()
+            .rev()
+            .collect::<String>();
+
         let test_word = "FooBar";
         let offset = 5;
         assert_eq!(custom_decipher(&base, offset, &custom_encipher(&base, offset, test_word)), test_word);

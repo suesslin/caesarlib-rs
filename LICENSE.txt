@@ -1,4 +1,4 @@
-Copyright (c) 2017 Lukas Mueller <lamuller@protonmail.com>
+Copyright (c) 2017 Lukas A. Mueller <lamuller@protonmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
