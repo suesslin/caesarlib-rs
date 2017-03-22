@@ -62,7 +62,7 @@ fn shift_seq(offset: u16, base_seq: &str) -> String {
 // Encipher
 
 // allows enciphering with a custom base sequence
-pub fn dif_base_seq_encipher(base_seq: &str, offset: u16, message: &str) -> String {
+pub fn custom_encipher(base_seq: &str, offset: u16, message: &str) -> String {
     let base_seq_vec = base_seq.to_string().all_chars();
     let new_seq = shift_seq(offset, base_seq).all_chars();
 
@@ -87,7 +87,7 @@ pub fn dif_base_seq_encipher(base_seq: &str, offset: u16, message: &str) -> Stri
 // enciphering with the general roman/latin alphabet
 pub fn encipher(offset: u16, message: &str) -> String {
     let base_seq = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    dif_base_seq_encipher(base_seq, offset, message)
+    custom_encipher(base_seq, offset, message)
 }
 
 pub fn rdm_encipher(message: &str) -> (u16, String) {
@@ -99,7 +99,7 @@ pub fn rdm_encipher(message: &str) -> (u16, String) {
 // decipher
 
 // allows deciphering with a custom base sequence
-pub fn dif_base_seq_decipher(base_seq: &str, offset: u16, message: &str) -> String {
+pub fn custom_decipher(base_seq: &str, offset: u16, message: &str) -> String {
     let cipher_seq_vec = shift_seq(offset, base_seq).all_chars();
     let base_seq_vec = base_seq.to_string().all_chars();
 
@@ -123,5 +123,5 @@ pub fn dif_base_seq_decipher(base_seq: &str, offset: u16, message: &str) -> Stri
 // deciphering with the general roman/latin alphabet
 pub fn decipher(offset: u16, message: &str) -> String {
     let base_seq = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    dif_base_seq_decipher(base_seq, offset, message)
+    custom_decipher(base_seq, offset, message)
 }
