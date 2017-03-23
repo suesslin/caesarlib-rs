@@ -21,6 +21,17 @@ use caesarlib::*;
 
 ## Methods
 ```rust
+
+// With custom base sequence
+// Can look like "ABC...Zabc...z"
+
+custom_encipher(base_seq: &str, offset: u16, message: &str) -> String
+
+custom_decipher(base_seq: &str, offset: u16, message: &str) -> String
+
+// With roman/latin characters
+// Looks like the example for custom base sequences
+
 fn encipher(offset: u16, message: &str) -> String;
 
 fn decipher(offset: u16, message: &str) -> String;

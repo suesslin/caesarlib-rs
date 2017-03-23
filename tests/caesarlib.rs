@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 extern crate caesarlib;
-use caesarlib::{encipher, decipher, rdm_encipher};
+use caesarlib::{encipher, decipher, rdm_encipher, custom_encipher, custom_decipher};
 
 
 #[cfg(test)]
@@ -50,5 +50,13 @@ mod tests {
         let test_word = "FooBar";
         let (_, enciphered) = rdm_encipher(test_word);
         assert_ne!(test_word, &enciphered);
+    }
+
+    #[test]
+    fn custom_base_sequence_correct_encipherd_and_deciphered() {
+        let base = "zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA";
+        let offset = 5;
+        let test_word = "FooBar";
+        assert_eq!(custom_decipher(base, offset, &custom_encipher(base, offset, test_word)), test_word);
     }
 }

@@ -59,17 +59,19 @@ fn shift_seq(offset: u16, base_seq: &str) -> String {
     new_seq
 }
 
-pub fn encipher(offset: u16, message: &str) -> String {
-    let base = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    let base_seq = base.to_string().all_chars();
-    let new_seq = shift_seq(offset, base).all_chars();
+// Encipher
+
+// allows enciphering with a custom base sequence
+pub fn custom_encipher(base_seq: &str, offset: u16, message: &str) -> String {
+    let base_seq_vec = base_seq.to_string().all_chars();
+    let new_seq = shift_seq(offset, base_seq).all_chars();
 
     let mut new_string = String::new();
 
     for achar in message.to_string().all_chars() {
         let mut found = false;
-        for i in 0..base_seq.last_pos() {
-            if achar == base_seq[i] {
+        for i in 0..base_seq_vec.last_pos() {
+            if achar == base_seq_vec[i] {
                 new_string += &new_seq[i];
                 found = true;
             }
@@ -82,18 +84,32 @@ pub fn encipher(offset: u16, message: &str) -> String {
     new_string
 }
 
-pub fn decipher(offset: u16, message: &str) -> String {
-    let base = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    let cipher_seq = shift_seq(offset, base).all_chars();
-    let base_seq = base.to_string().all_chars();
+// enciphering with the general roman/latin alphabet
+pub fn encipher(offset: u16, message: &str) -> String {
+    let base_seq = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    custom_encipher(base_seq, offset, message)
+}
+
+pub fn rdm_encipher(message: &str) -> (u16, String) {
+    let mut rng = rand::thread_rng();
+    let offset = rng.gen::<u16>();
+    (offset, encipher(offset, message))
+}
+
+// decipher
+
+// allows deciphering with a custom base sequence
+pub fn custom_decipher(base_seq: &str, offset: u16, message: &str) -> String {
+    let cipher_seq_vec = shift_seq(offset, base_seq).all_chars();
+    let base_seq_vec = base_seq.to_string().all_chars();
 
     let mut new_string = String::new();
 
     for achar in message.to_string().all_chars() {
         let mut found = false;
-        for i in 0..cipher_seq.last_pos() {
-            if achar == cipher_seq[i] {
-                new_string += &base_seq[i];
+        for i in 0..cipher_seq_vec.last_pos() {
+            if achar == cipher_seq_vec[i] {
+                new_string += &base_seq_vec[i];
                 found = true;
             }
         }
@@ -104,8 +120,8 @@ pub fn decipher(offset: u16, message: &str) -> String {
     new_string
 }
 
-pub fn rdm_encipher(message: &str) -> (u16, String) {
-    let mut rng = rand::thread_rng();
-    let offset = rng.gen::<u16>();
-    (offset, encipher(offset, message))
+// deciphering with the general roman/latin alphabet
+pub fn decipher(offset: u16, message: &str) -> String {
+    let base_seq = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    custom_decipher(base_seq, offset, message)
 }
