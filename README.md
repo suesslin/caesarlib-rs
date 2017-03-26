@@ -58,9 +58,29 @@ Result: qOfcZig AOUbig
 With Offset: 51312
 ```
 
+## Tests
+First, the directory of the location of caesarlib must be selected.
+```sh
+cd caesarlib.rs
+```
+Subsequently, cargo helps out with testing.
+```sh
+cargo run --verbose
+```
+
+## Dependencies
+* [clap](https://github.com/kbknapp/clap-rs) - Command Line Argument Parser for Rust
+* [rand](https://github.com/rust-lang-nursery/rand) - A Rust library for random number generators and other randomness functionality.
+
 ## Contributors
 * [Lukas Mueller](https://github.com/luki)
 * [Rémy Hubscher](https://github.com/natim)
+
+# Versioning
+[SemVer](http://semver.org/) applies for versioning. For the versions available, see the [crate](https://crates.io/crates/caesarlib)
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## Background
 This was inspired by my [Caesar Cipher algorithm
