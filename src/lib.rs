@@ -34,7 +34,7 @@ fn vec_shift(input: &Vec<String>, start: usize, end: usize) -> String {
     input
     .iter()
     .enumerate()
-    .filter(|&(i, _)| { i >= start && i <= end }) // end needed for one case otherwise not
+    .filter(|&(i, _)| { i >= start && i <= end })
     .map(|(_, x)| { x.to_string() })
     .collect::<Vec<String>>()
     .join("")
